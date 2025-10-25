@@ -25,6 +25,9 @@ remotes::install_github("AnthonyEbert/stoplight")
 Some examples of stoplight verifying correct statements, and making
 errors for false statements.
 
+Note: The function `try()` is only added to let the package install.
+Don’t add the `try()` function when you use it (unless you want to).
+
 ``` r
 library(stoplight)
 library(dplyr)
