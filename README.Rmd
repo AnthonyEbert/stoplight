@@ -1,0 +1,54 @@
+---
+output: github_document
+lang: "uk-en"
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+
+Sys.setenv(LANG = "en")
+```
+
+# stoplight: lightweight assertive programming for dplyr
+
+The goal of stoplight is to provide a tidy alternative to the `stopifnot` function. It's equivalent to filtering by a condition and making sure you didn't lose any rows. If no rows are lost, the data pipeline continues, if any row doesn't match the condition, the function returns an error. 
+
+If there's something wrong with your code, it's better to raise an error than miss it! 
+
+## Installation
+
+You can install stoplight like so:
+
+```{r,eval=FALSE}
+remotes::install_github("AnthonyEbert/stoplight")
+```
+
+## Example
+
+Some examples of stoplight verifying correct statements, and making errors for false statements. 
+
+```{r example}
+library(stoplight)
+library(dplyr)
+
+# The function try() is added to let the package install.
+# Don't add the try() function when you use it (unless you want to).
+
+iris |> group_by(Species) |> stoplight(n() == 50) # Passes
+
+iris |> group_by(Species) |> stoplight(n() != 50) |> try() # This is supposed to error
+
+starwars |> stoplight(n_distinct(name) == n()) # Passes
+
+starwars |> stoplight(if_all(where(is.numeric), ~ .x > 0)) |> try() # This is supposed to error
+
+starwars |> stoplight(if_all(where(is.numeric), ~ .x > 0 | is.na(.x))) # Passes
+```
+

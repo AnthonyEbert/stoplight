@@ -1,0 +1,13 @@
+Package: stoplight
+Title: lightweight assertive programming for dplyr
+Version: 0.0.0.9000
+Authors@R: 
+    person("Anthony", "Ebert", , "anthonyce@dcm.aau.dk", role = c("aut", "cre"))
+Description: The goal of stoplight is to provide a tidy alternative to the `stopifnot` function. It's equivalent to filtering by the condition and making sure you didn't lose any rows. If no rows are lost, the data pipeline continues, if any row doesn't match the condition, the function returns an error. 
+License: GPL-2
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Imports: 
+    dplyr,
+    rlang
